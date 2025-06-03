@@ -13,5 +13,3 @@ def main():
   print(f"{num_words} words found in the document")
   
 main()
-
-# print(get_book_text("books/frankenstein.txt"))
