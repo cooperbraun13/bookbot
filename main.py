@@ -1,4 +1,9 @@
-from stats import num_of_words, char_freq
+from stats import (
+  num_of_words, 
+  char_freq,
+  chars_dict_to_sorted_list,
+)
+  
 
 # reads text of a file into a string
 def get_book_text(filepath):
@@ -6,11 +11,24 @@ def get_book_text(filepath):
     return f.read()
   
 def main():
-  entire_book = get_book_text("books/frankenstein.txt")
-  print(entire_book)
+  book_path = "books/frankenstein.txt"
+  entire_book = get_book_text(book_path)
   num_words = num_of_words(entire_book)
-  print(f"{num_words} words found in the document")
   character_freq = char_freq(entire_book)
-  print(character_freq)
+  char_sorted_list = chars_dict_to_sorted_list(character_freq)
+  print_report(book_path, num_words, char_sorted_list)
+  
+def print_report(book_path, num_words, char_sorted_list):
+  print("============ BOOKBOT ============")
+  print(f"Analyzing book found at {book_path}...")
+  print("------------ Word Count ---------")
+  print(f"Found {num_words} total words")
+  print("------------ Character Count ----")
+  for item in char_sorted_list:
+    if not item["char"].isalpha():
+      continue
+    print(f"{item['char']}: {item['num']}")
+  print("============ END ================")
+  
   
 main()
