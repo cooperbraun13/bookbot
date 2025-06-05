@@ -1,9 +1,9 @@
+import sys
 from stats import (
   num_of_words, 
   char_freq,
   chars_dict_to_sorted_list,
 )
-  
 
 # reads text of a file into a string
 def get_book_text(filepath):
@@ -11,7 +11,11 @@ def get_book_text(filepath):
     return f.read()
   
 def main():
-  book_path = "books/frankenstein.txt"
+  if len(sys.argv) != 2:
+    print("Usage: python3 main.py <path_to_book>")
+    sys.exit(1)
+  
+  book_path = sys.argv[1]
   entire_book = get_book_text(book_path)
   num_words = num_of_words(entire_book)
   character_freq = char_freq(entire_book)
